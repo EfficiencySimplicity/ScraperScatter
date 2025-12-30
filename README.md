@@ -9,7 +9,7 @@ Originally made for [purelyhuman.xyz](https://purelyhuman.xyz/)
 
 ## How it works
 
-ScraperScatter takes an image and a depth as input. For each pixel of the input image, the program finds two colors that will create that pixel's color when averaged, simply by adding some amount N to the channels of the pixel, and respectively subtracting N to get the other color to be averaged.
+For each pixel of the input image, the program, via some method, finds two colors that will create that pixel's color when averaged, simply by adding some amount N to the channels of the pixel, and respectively subtracting N to get the other color to be averaged.
 
 Repeating for all the pixels in the image, you now
-have two more images that create the target image when averaged together. The depth parameter recursively repeats this process on the two created images, for better security.
+have two more images that create the target image when averaged together.
