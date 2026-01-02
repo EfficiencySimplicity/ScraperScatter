@@ -43,3 +43,8 @@ First working version! Got normal and multiply blend-modes working (multiply loo
 Hope to add more blend mode support in the future.
 
 Would love css animations for the demos too...
+
+# Version 5.1
+
+Got screen mode blend working, always forget to change
+pixellation mode in the new methods... This one is better than multiply. Very excited!
