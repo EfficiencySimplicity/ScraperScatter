@@ -35,3 +35,11 @@ not good enough.
 
 The best lead I have so far is to have different layers of pure noise, and not rely on the pixels averaging well,
 but just up and change the transparency of each so it has to average well. I dunno if an AI will bother to read the alpha channels to clearly, and maybe avoiding individual-channel averages will help get a cleaner (or, well, messier) result.
+
+# Version 5:
+
+First working version! Got normal and multiply blend-modes working (multiply looks promising!) and a LOD-based recreation system that works pretty well. Plus html demos to test out the system!
+
+Hope to add more blend mode support in the future.
+
+Would love css animations for the demos too...

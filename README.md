@@ -3,13 +3,12 @@
 ScraperScatter (name not final) is a system to confuse
 web scraping bots, such as those for OpenAI and Google,
 when they try to scrape images. It works by converting
-the image into many layers of static, that when laid over each other recreate the original image, although there is no single /<img/> element that contains the image.
+the image into many layers of partial images, that when laid over each other with the correct blend mode recreate the original image, although there is no single /<img/> element that contains the actual image.
 
 Originally made for [purelyhuman.xyz](https://purelyhuman.xyz/)
 
 ## How it works
 
-For each pixel of the input image, the program, via some method, finds two colors that will create that pixel's color when averaged, simply by adding some amount N to the channels of the pixel, and respectively subtracting N to get the other color to be averaged.
+The system generates a basic LOD of the image, very low-res, and then compounds upon it with higher-and-higher res images, created specially for the selected blend mode. None of the images are really usable until they are layered on top of each other with the correct blend mode.
 
-Repeating for all the pixels in the image, you now
-have two more images that create the target image when averaged together.
+This causes a massive amount of difficulty for web scrapers that intend to use the images for AI training purposes (or any other), as the scraper must be explicitly programmed to combine images in the correct way, or to screenshot the page and somehow isolate the image part. If a scraper scrapes a massive amount of these images, and the images' metadata has no information telling what images go to each other, it will be nearly impossible to reconstruct the original images again.
