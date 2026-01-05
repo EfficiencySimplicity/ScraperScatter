@@ -7,6 +7,10 @@ the image into many layers of partial images, that when laid over each other wit
 
 Originally made for [purelyhuman.xyz](https://purelyhuman.xyz/)
 
+[Read the article](https://medium.com/@joshward_accounts/how-an-obscure-css-feature-can-protect-your-art-from-ai-f5169ea5ff9a)
+
+[Check out the Discord thread!](https://discord.com/channels/1116110158775468054/1455285065037910077)
+
 ## How it works
 
 The system generates a basic LOD of the image, very low-res, and then compounds upon it with higher-and-higher res images, created specially for the selected blend mode. None of the images are really usable until they are layered on top of each other with the correct blend mode.

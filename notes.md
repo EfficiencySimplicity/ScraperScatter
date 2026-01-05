@@ -48,3 +48,10 @@ Would love css animations for the demos too...
 
 Got screen mode blend working, always forget to change
 pixellation mode in the new methods... This one is better than multiply. Very excited!
+
+# Version 5.2.1
+
+We now have normal, lighten, darken, plus-lighter, multiply, and screen blend modes, and the code is much simpler. Getting this to work in JS will prove an issue, as there doesn't seem to be a good equivalent of numpy for JS.
+
+Although [Tensorflow.js](https://github.com/tensorflow/tfjs) seems like a good option, with full array capabilities
+[StdLib](https://github.com/stdlib-js/stdlib) seems very promising too.
