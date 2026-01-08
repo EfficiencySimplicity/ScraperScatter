@@ -4,11 +4,28 @@
 
 
 <head>
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
     <script defer src="main.js"></script>
+
+    <style>
+        .image-box img {
+            position: absolute;
+        }
+        .move-image {
+            transition: transform 20s ease-in-out;
+            transform: translate(0px);
+        }
+        .move-image:hover {
+            transition: transform .5s ease-in-out;
+            transform:translate(2000px);
+        }
+    </style>
 </head>
 
 
-<body>
+<body id="body">
+    <input type="file" id="file-input" accept="image/jpeg" onchange="createImageBoxFromInputFile()"/>
+    SELECT IMAGE WAIT THEN HOVER IT FOR SCATTER EFFECT - WIGGLE MOUSE TO SCATTER
     <!-- input field for files, selector for blend mode, and images for holding layers -->
 </body>
 
