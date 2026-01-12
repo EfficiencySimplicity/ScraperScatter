@@ -123,7 +123,10 @@ function generate_component_images(image, method='screen'){
         // it seems the old current_map needs to be disposed of, same
         // as the target map.
 
+        let old_map = current_map;
         current_map = scale_by(current_map)
+        old_map.dispose();
+        old_map = current_map;
 
         if (method === 'multiply'){
             [current_map, new_image] = get_next_layer_multiply(target_map, current_map)
@@ -137,8 +140,15 @@ function generate_component_images(image, method='screen'){
             [current_map, new_image] = get_next_layer_plus_lighter(target_map, current_map)
         }
 
+        old_map.dispose();
+
+        // work on this in a separate function
+        old_map=new_image;
         new_image = new_image.clipByValue(0, 1);
+        old_map.dispose();
+        old_map=new_image;
         new_image = scale_by(new_image, Math.floor(w/new_image.shape[0]));
+        old_map.dispose();
         layer_images.push(new_image);
 
         target_map.dispose();
