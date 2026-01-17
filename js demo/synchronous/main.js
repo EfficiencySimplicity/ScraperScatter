@@ -124,6 +124,8 @@ function generateKatanaLayers(image, method='screen'){
     return cleaned_layers;
 }
 
+// MEMORY IN THESE 2 FNS NOT THE BEST
+
 function shuffleLayers(layers) {
     let [h,w,c] = layers[0].shape;
     for (let i=0; i<20; i++) {
