@@ -124,6 +124,37 @@ function generateKatanaLayers(image, method='screen'){
     return cleaned_layers;
 }
 
+function shuffleLayers(layers) {
+    let [h,w,c] = layers[0].shape;
+    for (let i=0; i<20; i++) {
+        let indexA = Math.floor(Math.random()*layers.length);
+        let indexB = Math.floor(Math.random()*layers.length);
+
+        let [a,b] = returnSwapped(layers[indexA], layers[indexB]);
+        layers[indexA].dispose();
+        layers[indexB].dispose();
+        layers[indexA] = a;
+        layers[indexB] = b;
+    }
+    return layers;
+}
+
+function returnSwapped(a,b) {return tf.tidy(() => {
+    let [h,w,c] = a.shape;
+
+    let sliceX = Math.floor(Math.random()*w/2);
+    let sliceY = Math.floor(Math.random()*h/2);
+    let sliceH = Math.floor(h/2);
+    let sliceW = Math.floor(w/2);
+
+    let sliceA = tf.clone(a.slice([sliceY, sliceX],[sliceH, sliceW]));
+    let sliceB = tf.clone(b.slice([sliceY, sliceX],[sliceH, sliceW]));
+
+    let updateMapA = sliceB.pad([[sliceY, h-(sliceY+sliceH)],[sliceX, w-(sliceX+sliceW)],[0,0]],-1);
+    let updateMapB = sliceA.pad([[sliceY, h-(sliceY+sliceH)],[sliceX, w-(sliceX+sliceW)],[0,0]],-1);
+    return [a.where(tf.equal(updateMapA, -1), updateMapA), b.where(tf.equal(updateMapB, -1), updateMapB)];
+})}
+
 // Creates image box from images
 // This should *return* the box for later use
 function layers2ImageBox(layers, blendmode) {
@@ -163,6 +194,7 @@ function arr2img(arr) {
     let [h,w,c] = tensor.shape;
 
     // Remove dataSync in async version?
+    // tf.browser.toPixels?
     let data = new ImageData(
         Uint8ClampedArray.from(tensor.dataSync()),
         w, h);
@@ -188,7 +220,7 @@ function getCurrentBlendModeSelected() {
 }
 
 // Arr is assumed to have 3 channels, and have values ranging from 0 to 255.
-function katanifyAndInsertInDocument(arr) {
+function katanifyAndInsertInDocument(arr, shuffle=true) {
     // width and height seem to be flipped, but
     // that won't affect anything.
     // just note that in the above funstions,
@@ -201,6 +233,8 @@ function katanifyAndInsertInDocument(arr) {
     let blendmode = getCurrentBlendModeSelected();//'screen';
 
     let layers    = generateKatanaLayers(arr, blendmode)
+
+    layers = shuffleLayers(layers);
     
     layers2ImageBox(layers, blendmode);
 }
